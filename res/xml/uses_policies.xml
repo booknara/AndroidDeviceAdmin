@@ -1,0 +1,21 @@
+<device-admin xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--
+        <limit-password /> : Set password rules
+        <watch-login /> : Monitor screen-unlock attempts
+        <reset-password /> : Change the screen-unlock password
+        <force-lock /> : Lock the screen
+        <wipe-data /> : Erase all data
+        <expire-password /> : Set lock-screen password expiration
+        <encrypted-storage /> : Set storage encryption
+        <disable-camera /> : Disable cameras
+     -->    
+        <uses-policies>
+<!--                 <limit-password />
+                <watch-login />
+                <reset-password />
+                <force-lock />
+                <wipe-data />
+                <expire-password />
+                <encrypted-storage />
+ -->        </uses-policies>
+</device-admin>
