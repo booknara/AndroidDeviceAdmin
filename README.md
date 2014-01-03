@@ -9,5 +9,5 @@ And also, you can change Device Administration permission by setting /res/xml/us
  - expire-password : Set lock-screen password expiration
  - encrypted-storage : Set storage encryption
  - disable-camera : Disable cameras
-    
-
+ 
+If you have any questions or bug reports, please send me a message(@daniel_booknara) or leave an issue ticket.
