@@ -1,19 +1,24 @@
 package com.booknara.deviceadmin;
 
 import android.app.admin.DeviceAdminReceiver;
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
 
 /**
- * This is the component that is responsible for actual device administration.
- * It becomes the receiver when a policy is applied. It is important that we
- * subclass DeviceAdminReceiver class here and to implement its only required
- * method onEnabled().
+ * DeviceAdminReceiver
+ * 
+ * @Author : Daehee Han(bookdori81@gmail.com)
+ * @Date : Jan 23, 2014 
+ * @Version : 1.0.0
  */
 public class DeviceAdminDemoReceiver extends DeviceAdminReceiver {
 	private static final String CNAME = DeviceAdminDemoReceiver.class.getSimpleName();
+	
+	private static final String SETTING_PACKAGE = "com.android.settings";
 
 	/** Called when this application is approved to be a device administrator. */
 	@Override
@@ -22,6 +27,31 @@ public class DeviceAdminDemoReceiver extends DeviceAdminReceiver {
 		Log.d(CNAME, "onEnabled");
 	}
 
+    private void openPackageName(Context context, String packageName) {
+        Intent intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
+        intent.addCategory("android.intent.category.LAUNCHER");
+        context.startActivity(intent);
+    }
+
+    private void resetPassword(Context context, SharedPreferences sharedpreferences) {
+        DevicePolicyManager devicepolicymanager = (DevicePolicyManager)context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        // TODO Using sharedpreferences 
+        devicepolicymanager.resetPassword("password", DevicePolicyManager.RESET_PASSWORD_REQUIRE_ENTRY);
+        devicepolicymanager.lockNow();
+    }
+    
+	@Override
+    public CharSequence onDisableRequested(Context context, Intent intent) {
+		final Context ctx = context;
+        final SharedPreferences sharedpreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        // TODO Sending Email Service
+        openPackageName(ctx, SETTING_PACKAGE);
+        resetPassword(ctx, sharedpreferences);
+        
+		Log.d(CNAME, "onDisableRequested()");
+        return "onDisableRequested";
+    }
+	
 	/** Called when this application is no longer the device administrator. */
 	@Override
 	public void onDisabled(Context context, Intent intent) {

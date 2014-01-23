@@ -10,12 +10,8 @@
         <disable-camera /> : Disable cameras
      -->    
         <uses-policies>
-<!--                 <limit-password />
-                <watch-login />
-                <reset-password />
-                <force-lock />
-                <wipe-data />
-                <expire-password />
-                <encrypted-storage />
- -->        </uses-policies>
+			<reset-password />
+			<force-lock />
+			<encrypted-storage />
+ 		</uses-policies>
 </device-admin>
