@@ -55,7 +55,6 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 			if (resultCode == Activity.RESULT_OK) {
 				Log.i(CNAME, "Administration enabled!");
 				Toast.makeText(this, "Administration enabled!", Toast.LENGTH_SHORT).show();
-//				toggleButton.setChecked(true);
 			} else {
 				Log.i(CNAME, "Administration enable FAILED!");
 				toggleButton.setChecked(false);

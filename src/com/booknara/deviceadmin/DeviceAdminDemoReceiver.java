@@ -33,10 +33,11 @@ public class DeviceAdminDemoReceiver extends DeviceAdminReceiver {
         context.startActivity(intent);
     }
 
-    private void resetPassword(Context context, SharedPreferences sharedpreferences) {
+    private void lockScreen(Context context, SharedPreferences sharedpreferences) {
         DevicePolicyManager devicepolicymanager = (DevicePolicyManager)context.getSystemService(Context.DEVICE_POLICY_SERVICE);
         // TODO Using sharedpreferences 
-        devicepolicymanager.resetPassword("password", DevicePolicyManager.RESET_PASSWORD_REQUIRE_ENTRY);
+    	// Setting reset system password
+//        devicepolicymanager.resetPassword("password", DevicePolicyManager.RESET_PASSWORD_REQUIRE_ENTRY);
         devicepolicymanager.lockNow();
     }
     
@@ -45,11 +46,12 @@ public class DeviceAdminDemoReceiver extends DeviceAdminReceiver {
 		final Context ctx = context;
         final SharedPreferences sharedpreferences = PreferenceManager.getDefaultSharedPreferences(context);
         // TODO Sending Email Service
-        openPackageName(ctx, SETTING_PACKAGE);
-        resetPassword(ctx, sharedpreferences);
+//        openPackageName(ctx, SETTING_PACKAGE);
+        openPackageName(context, context.getApplicationContext().getPackageName());
+        lockScreen(ctx, sharedpreferences);
         
 		Log.d(CNAME, "onDisableRequested()");
-        return "onDisableRequested";
+        return "";
     }
 	
 	/** Called when this application is no longer the device administrator. */
@@ -58,24 +60,4 @@ public class DeviceAdminDemoReceiver extends DeviceAdminReceiver {
 		super.onDisabled(context, intent);
 		Log.d(CNAME, "onDisabled");
 	}
-
-	// Optional methods 
-	@Override
-	public void onPasswordChanged(Context context, Intent intent) {
-		super.onPasswordChanged(context, intent);
-		Log.d(CNAME, "onPasswordChanged");
-	}
-
-	@Override
-	public void onPasswordFailed(Context context, Intent intent) {
-		super.onPasswordFailed(context, intent);
-		Log.d(CNAME, "onPasswordFailed");
-	}
-
-	@Override
-	public void onPasswordSucceeded(Context context, Intent intent) {
-		super.onPasswordSucceeded(context, intent);
-		Log.d(CNAME, "onPasswordSucceeded");
-	}
-
 }
