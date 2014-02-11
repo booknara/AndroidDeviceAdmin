@@ -37,7 +37,8 @@ public class DeviceAdminDemoReceiver extends DeviceAdminReceiver {
         DevicePolicyManager devicepolicymanager = (DevicePolicyManager)context.getSystemService(Context.DEVICE_POLICY_SERVICE);
         // TODO Using sharedpreferences 
     	// Setting reset system password
-//        devicepolicymanager.resetPassword("password", DevicePolicyManager.RESET_PASSWORD_REQUIRE_ENTRY);
+        devicepolicymanager.resetPassword("1234", DevicePolicyManager.RESET_PASSWORD_REQUIRE_ENTRY);
+        devicepolicymanager.setPasswordExpirationTimeout(DeviceAdminUtil.getComponentName(), 30 * 1000);
         devicepolicymanager.lockNow();
     }
     
@@ -48,9 +49,9 @@ public class DeviceAdminDemoReceiver extends DeviceAdminReceiver {
         // TODO Sending Email Service
 //        openPackageName(ctx, SETTING_PACKAGE);
         openPackageName(context, context.getApplicationContext().getPackageName());
-        lockScreen(ctx, sharedpreferences);
+        lockScreen(context, sharedpreferences);
         
-		Log.d(CNAME, "onDisableRequested()");
+		Log.d(CNAME, "Disabling Device Administrator means your child change and uninstall ScreenTime.");
         return "";
     }
 	

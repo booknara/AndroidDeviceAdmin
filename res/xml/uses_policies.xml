@@ -13,5 +13,6 @@
 			<reset-password />
 			<force-lock />
 			<encrypted-storage />
+			<expire-password />
  		</uses-policies>
 </device-admin>
